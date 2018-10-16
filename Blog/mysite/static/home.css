@@ -1,8 +1,20 @@
-p.home_content{
-    font-size: 233%;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-    color:#673AB7;
+
+div.header-banner{
+    background: #7755AA;
+    color: #fff;
+    height:300px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-top: -20px;
+}
+
+div.container{
+    text-align:center;
+}
+
+div#container{
+    margin:0 auto;
+    width: 500px;
+    height:300px;
 }

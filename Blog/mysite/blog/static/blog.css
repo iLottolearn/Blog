@@ -1,6 +1,4 @@
-ul.blog-types {
-    list-style-type: none;
-}
+
 
 div.blog:not(:last-child){
     margin-bottom: 2em;
@@ -9,9 +7,25 @@ div.blog:not(:last-child){
 }
 
 div.pagination {
-    text-align: center;
+    width: 100%;
+    text-align:center;
 }
 
-div.blog-more{
+
+div.header-banner{
+    background: #7755AA;
+    color: #fff;
+    height:300px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-top: -20px;
+}
+
+div.header{
+    text-align:center;
+}
+
+div.container{
     margin-top: 1em;
 }
