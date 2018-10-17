@@ -7,6 +7,8 @@
 
 {% block header_extends %}
     <link rel="stylesheet" href="{% static 'blog.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 {% endblock %}
 
 {% block left_content %}
@@ -16,13 +18,24 @@
             <div class="col-xs-12 col-sm-8 col-md-10">
                 <div class="panel panel-default">
                   <div class="panel-body">
-                    <h3>{{ blog.title }}</h3>
-                    <p>作者：{{ blog.author }}&nbsp;&nbsp;
-                    分类：<a href="{% url 'blog_with_type' blog.blog_type.pk %}">{{ blog.blog_type }}</a>&nbsp;&nbsp;
-                    发表日期：{{ blog.created_time }}&nbsp;&nbsp;
-                    阅读量：({{ blog.get_read_num  }})</p>
-                      <hr>
-                    <P>{{ blog.content|safe }}</P>
+                    <div class="time-readings">
+                        <span>{{ blog.created_time|date:"Y-m-d" }}</span><br>
+                        <span>{{ blog.get_read_num }} Reading</span>
+                    </div>
+                      <h2 class="blog_detail_title">{{ blog.title }}</h2>
+                    <!--<p>-->
+                    <!--分类：<a href="{% url 'blog_with_type' blog.blog_type.pk %}">{{ blog.blog_type }}</a>&nbsp;&nbsp;-->
+                    <!--</p>-->
+                    <div class="blog-content">
+                        <P>{{ blog.content|safe }}</P>
+                        <hr>
+                        <p>--EOF--</p>
+                        <br>
+                        <div class="blog-type">
+                           <p><span>发表时间：{{ blog.created_time }}</span>&nbsp;&nbsp;&nbsp;  <span class="glyphicon glyphicon-tag"></span><a href="{% url 'blog_with_type' blog.blog_type.pk %}"> {{ blog.blog_type }}</a></p>
+                       </div>
+                    </div>
+
                   </div>
                 </div>
                 <div class="blog-more">
@@ -36,7 +49,7 @@
                           {% if next_blog %}
                           <li class="next"><a href="{% url 'blog_detail' next_blog.pk %}">{{ next_blog.title }} <span aria-hidden="true">&rarr;</span></a></li>
                           {% else %}
-                          没有了 <span aria-hidden="true">&rarr;</span>
+                          <li class="next"><a>没有了 <span aria-hidden="true">&rarr;</span></a></li>
                           {% endif %}
                       </ul>
                     </nav>
@@ -54,6 +67,19 @@
                         <!--没有了-->
                         <!--{% endif %}-->
                     <!--</p>-->
+                </div>
+                <div id="gitalk-container">
+                    const gitalk = new Gitalk({
+                      clientID: 'iLottolearn',
+                      clientSecret: 'nishizhuba00',
+                      repo: 'https://github.com/iLottolearn/Blog',
+                      owner: 'L',
+                      admin: ['GitHub repo owner and collaborators, only these guys can initialize github issues'],
+                      id: location.pathname,      // Ensure uniqueness and length less than 50
+                      distractionFreeMode: false  // Facebook-like distraction free mode
+                    })
+
+                    gitalk.render('gitalk-container')
                 </div>
             </div>
             {% endblock %}
